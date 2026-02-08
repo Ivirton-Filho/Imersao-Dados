@@ -5,10 +5,36 @@ import plotly.express as px
 #configuração da pagina
 st.set_page_config(
     page_title="Dashbord de Salários na Área de Dados",
-    psge_icon="📊",
+    page_icon="📊",
     layout="wide",
 )
 
 #carregando dados
 df = pd.read_csv("https://raw.githubusercontent.com/guilhermeonrails/data-jobs/refs/heads/main/salaries.csv")
 
+#Barra Lateral (Filtros)
+st.sidebar.header("🔍 Filtros")
+
+#Filtro de Ano
+anos_disponiveis = sorted(df["work_year"].unique())
+anos_selecionados = st.sidebar.multiselect("Ano", anos_disponiveis, default=anos_disponiveis)
+
+#Filtro de Senioridade
+senioridades_disponiveis = sorted(df["experience_level"].unique())
+senioridades_selecionadas = st.sidebar.multiselect("Senioridade", senioridades_disponiveis, default=senioridades_disponiveis)
+
+#Filtro por Tipo de Contrato
+contratos_disponiveis = sorted(df["employment_type"].unique())
+contratos_selecionados = st.sidebar.multiselect("Tipo de Contrato", contratos_disponiveis, default=contratos_disponiveis)
+
+#Filtro por Tamanho da Empresa
+tamanhos_disponiveis = sorted(df["company_size"].unique())
+tamanhos_selecionados = st.sidebar.multiselect("Tamanho da Empresa", tamanhos_disponiveis, default=tamanhos_disponiveis)
+
+#Filtragem do DataFrame
+df_filtrado = df [
+    (df["work_year"].isin(anos_selecionados)) &
+    (df["experience_level"].isin(senioridades_selecionadas)) &
+    (df["employment_type"].isin(contratos_selecionados)) &
+    (df["company_size"].isin(tamanhos_selecionados))
+]
