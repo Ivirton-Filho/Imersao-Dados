@@ -1,0 +1,30 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+
+# Virtual environments
+venv/
+.venv/
+env/
+.Python
+
+# Environment variables
+.env
+.env.*
+
+# Editor/IDE
+.vscode/
+.idea/
+
+# Python packaging / build
+build/
+dist/
+*.egg-info/
+
+# Logs / caches
+*.pyc
+pip-log.txt
+.pytest_cache/
+
+# Jupyter
+.ipynb_checkpoints/
